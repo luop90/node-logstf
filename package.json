@@ -1,0 +1,14 @@
+{
+  "name": "logs-tf",
+  "description": "A NodeJS wrapper for the Logs-TF API",
+  "author": "Luop90",
+  "license": "MIT",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luop90/node-logstf"
+  },
+  "dependencies": {
+    "request": "^2.74.0"
+  }
+}
