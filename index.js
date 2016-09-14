@@ -10,7 +10,7 @@ var Logs = {};
  */
 Logs.uploadLogFile = function (data, callback) {
   if (!data || typeof data === 'function' || !data.apiKey || !data.logLocation) {
-    return callback(new Error('Invalid input'), false);
+    return callback(new Error('Invalid input - missing apiKey or logLocation'), false);
   }
 
   var url = ``;
