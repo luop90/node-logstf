@@ -1,9 +1,10 @@
 const request = require('request');
+const fs = require('fs');
 
 var Logs = {};
 
 /**
- * .pipes() a file to logs.tf
+ * POSTs a file to logs.tf
  * @param {OBJECT} data
  * @param {FUNCTION} callback
  */
@@ -13,14 +14,25 @@ Logs.uploadLogFile = function (data, callback) {
   }
 
   var url = ``;
-  var form = {
+  var formData = {
     title: data.title,
     map: data.map || undefined,
     key: data.apiKey,
-    uploader: 'NodeJS Log Uploader'
+    uploader: 'NodeJS Log Uploader',
+    logfile: fs.createReadStream(data.logLocation)
   };
 
+  request.post({
+    url: url,
+    formData: formData
+  }, (error, response, body) => {
+    if (!isValidResponse(error, response)) {
+      return callback(new Error('Failed to upload log to Logs.TF'), undefined);
+    }
 
+    body = JSON.parse(body);
+    callback(null, body);
+  });
 };
 
 /**
